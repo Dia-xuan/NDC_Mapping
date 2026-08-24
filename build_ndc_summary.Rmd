@@ -1,0 +1,99 @@
+---
+title: "build_ndc_summary"
+author: "Dia Deng"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+
+category_summary <- read_csv(
+  "data/processed/summary/category_merge_summary.csv",
+  show_col_types = FALSE
+)
+
+medication_summary <- read_csv(
+  "data/processed/summary/medication_merge_summary.csv",
+  show_col_types = FALSE
+)
+```
+
+# Overview
+
+This report summarizes the FDA NDC searches and merging process for the medication categories completed so far.
+
+Exact duplicate FDA records retrieved through multiple searches are collapsed into one record. Records sharing the same NDC Package Code but containing different descriptive information are retained and flagged for review.
+
+```{r category-overview}
+category_summary %>%
+  select(
+    Category = category,
+    Medications = medications,
+    `Raw files` = raw_files,
+    `Raw rows` = raw_rows,
+    `Exact duplicates removed` = exact_duplicates_removed,
+    `Distinct NDC codes` = distinct_ndc_codes,
+    `Final master rows` = final_master_rows,
+    `Sparse rows` = sparse_rows,
+    `Conflicting NDCs` = conflicting_ndc_codes,
+    `Missing NDCs` = missing_ndc_rows
+  ) %>%
+  kable()
+```
+
+# Medication-level merge summary
+
+`Nonproprietary rows` and `Proprietary rows` show the number of records returned by the corresponding FDA search types. `Exact duplicates removed` records redundant FDA rows removed during merging.
+
+```{r medication-summary}
+medication_summary %>%
+  select(
+    Category = category,
+    Medication = medication,
+    Combo = combo,
+    `Raw files` = raw_files,
+    `Nonproprietary rows` = nonproprietary_rows,
+    `Proprietary rows` = proprietary_rows,
+    `Exact duplicates removed` = exact_duplicates_removed,
+    `Distinct NDC codes` = distinct_ndc_codes,
+    `Final rows` = final_master_rows
+  ) %>%
+  arrange(Category, Medication) %>%
+  kable()
+```
+
+# QC review
+
+Only medications with at least one QC flag are shown below.
+
+```{r qc-summary}
+qc_summary <- medication_summary %>%
+  filter(
+    missing_ndc_rows > 0 |
+    sparse_rows > 0 |
+    conflicting_ndc_codes > 0
+  ) %>%
+  select(
+    Category = category,
+    Medication = medication,
+    `Missing NDC rows` = missing_ndc_rows,
+    `Sparse rows` = sparse_rows,
+    `Conflicting NDC codes` = conflicting_ndc_codes,
+    `Conflicting rows retained` = conflicting_rows_retained
+  )
+
+if (nrow(qc_summary) == 0) {
+  cat("No QC flags were identified.")
+} else {
+  kable(qc_summary)
+}
+```
+
+# Notes
+
+- **Exact duplicate**: the same FDA record appeared more than once across the raw search results and was collapsed during merging.
+- **Sparse record**: an FDA record with at least three missing key descriptive fields.
+- **Conflicting NDC**: the same NDC Package Code occurs in multiple retained rows because its descriptive information differs.
+- QC flags identify records for review; they do not automatically imply that a record should be excluded.
