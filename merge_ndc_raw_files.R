@@ -24,6 +24,7 @@ read_fda_csv <- function(path) {
   read_csv(
     path,
     locale = locale(encoding = enc),
+    col_types = cols(.default = col_character()),
     show_col_types = FALSE,
     na = ""
   ) %>%
