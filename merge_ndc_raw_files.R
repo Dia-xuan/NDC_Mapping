@@ -99,13 +99,13 @@ process_medication <- function(meta) {
   missing <- raw %>%
     filter(
       is.na(`NDC Package Code`) |
-        `NDC Package Code` == ""
+        `NDC Package Code` %in% c("", "NA", "N/A")
     )
   
   valid <- raw %>%
     filter(
       !is.na(`NDC Package Code`),
-      `NDC Package Code` != ""
+      `NDC Package Code` %in% c("", "NA", "N/A")
     )
   
   
@@ -224,7 +224,10 @@ process_medication <- function(meta) {
   merged <- merged %>%
     group_by(`NDC Package Code`) %>%
     mutate(
-      qc_conflict = n() > 1
+      qc_conflict =
+        !is.na(`NDC Package Code`) &
+        !`NDC Package Code` %in% c("", "NA", "N/A") &
+        n() > 1
     ) %>%
     ungroup()
   
