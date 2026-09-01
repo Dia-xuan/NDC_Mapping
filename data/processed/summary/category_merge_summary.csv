@@ -1,6 +1,6 @@
 ﻿"broad_group","category","medications","combo_medications","raw_files","raw_rows","nonproprietary_rows","proprietary_rows","exact_duplicates_removed","conflicting_ndc_codes","conflicting_rows_retained","missing_ndc_rows","sparse_rows","distinct_ndc_codes","final_master_rows"
-"Cardiovascular_Medication","ACE_Inhibitors",15,4,21,2147,2061,86,0,0,0,0,0,NA,NA
-"Cardiovascular_Medication","ARBs",19,12,26,3219,3098,121,0,0,0,0,0,NA,NA
-"Cardiovascular_Medication","Other_Antihypertensives",46,0,74,12526,12354,172,0,0,0,27,0,1,27
-"Cardiovascular_Medication","Other_Cardiovascular_Drugs",45,0,81,8680,8298,382,0,0,0,7,0,1,7
-"Respiratory:allergy_Medication","NonSedating_Antihistamines",18,0,36,7120,6799,321,0,0,0,3,0,1,3
+"Cardiovascular_Medication","ACE_Inhibitors",15,4,21,2147,2061,86,66,0,0,0,4,2071,2081
+"Cardiovascular_Medication","ARBs",19,12,26,3219,3098,121,43,0,0,0,1,3113,3176
+"Cardiovascular_Medication","Other_Antihypertensives",46,0,74,12526,12354,172,164,1,2,27,28,11829,12335
+"Cardiovascular_Medication","Other_Cardiovascular_Drugs",45,0,81,8680,8298,382,325,23,46,7,17,8242,8348
+"Respiratory:allergy_Medication","NonSedating_Antihistamines",18,0,36,7120,6799,321,168,98,196,3,1,6193,6949

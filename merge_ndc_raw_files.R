@@ -105,7 +105,7 @@ process_medication <- function(meta) {
   valid <- raw %>%
     filter(
       !is.na(`NDC Package Code`),
-      `NDC Package Code` %in% c("", "NA", "N/A")
+      !`NDC Package Code` %in% c("", "NA", "N/A")
     )
   
   
