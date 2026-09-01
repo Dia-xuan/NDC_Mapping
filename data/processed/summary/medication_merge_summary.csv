@@ -7,7 +7,7 @@
 "Cardiovascular_Medication","ACE_Inhibitors","EnalaprilHydrochlorothiazide",TRUE,1,1,0,1,0,0,0,0,0,1,1
 "Cardiovascular_Medication","ACE_Inhibitors","Enalaprilat",FALSE,1,5,5,0,0,0,0,0,0,5,5
 "Cardiovascular_Medication","ACE_Inhibitors","Fosinopril",FALSE,2,102,48,54,48,0,0,0,0,54,54
-"Cardiovascular_Medication","ACE_Inhibitors","Lisinopril",FALSE,3,1007,1000,7,1,0,0,0,3,1006,1006
+"Cardiovascular_Medication","ACE_Inhibitors","Lisinopril",FALSE,3,1017,1010,7,7,0,0,4,0,1006,1006
 "Cardiovascular_Medication","ACE_Inhibitors","LisinoprilHydrochlorothiazide",TRUE,1,3,0,3,0,0,0,0,0,3,3
 "Cardiovascular_Medication","ACE_Inhibitors","Moexipril",FALSE,1,10,10,0,0,0,0,0,0,10,10
 "Cardiovascular_Medication","ACE_Inhibitors","PerindoprilErbumine",FALSE,1,3,3,0,0,0,0,0,0,3,3
