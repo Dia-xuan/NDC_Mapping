@@ -1,5 +1,5 @@
-﻿"category","medications","combo_medications","raw_files","raw_rows","nonproprietary_rows","proprietary_rows","exact_duplicates_removed","conflicting_ndc_codes","conflicting_rows_retained","missing_ndc_rows","sparse_rows","distinct_ndc_codes","final_master_rows"
-"ACE_Inhibitors",15,4,21,2147,2061,86,66,0,0,0,4,2071,2081
-"ARBs",19,12,26,3219,3098,121,43,0,0,0,1,3113,3176
-"Other_Antihypertensives",46,0,74,12526,12354,172,164,3,29,0,28,11830,12362
-"Other_Cardiovascular_Drugs",45,0,81,8680,8298,382,325,25,53,0,17,8243,8355
+﻿"broad_group","category","medications","combo_medications","raw_files","raw_rows","nonproprietary_rows","proprietary_rows","exact_duplicates_removed","conflicting_ndc_codes","conflicting_rows_retained","missing_ndc_rows","sparse_rows","distinct_ndc_codes","final_master_rows"
+"Cardiovascular_Medication","ACE_Inhibitors",15,4,21,2147,2061,86,66,0,0,0,4,2071,2081
+"Cardiovascular_Medication","ARBs",19,12,26,3219,3098,121,43,0,0,0,1,3113,3176
+"Cardiovascular_Medication","Other_Antihypertensives",46,0,74,12526,12354,172,164,3,29,0,28,11830,12362
+"Cardiovascular_Medication","Other_Cardiovascular_Drugs",45,0,81,8680,8298,382,325,25,53,0,17,8243,8355

@@ -29,6 +29,7 @@ Exact duplicate FDA records retrieved through multiple searches are collapsed in
 ```{r category-overview}
 category_summary %>%
   select(
+    `Broad Group` = broad_group,
     Category = category,
     Medications = medications,
     `Raw files` = raw_files,
@@ -50,6 +51,7 @@ category_summary %>%
 ```{r medication-summary}
 medication_summary %>%
   select(
+    `Broad Group` = broad_group,
     Category = category,
     Medication = medication,
     Combo = combo,
@@ -60,7 +62,7 @@ medication_summary %>%
     `Distinct NDC codes` = distinct_ndc_codes,
     `Final rows` = final_master_rows
   ) %>%
-  arrange(Category, Medication) %>%
+  arrange(`Broad Group`,Category, Medication) %>%
   kable()
 ```
 
@@ -76,6 +78,7 @@ qc_summary <- medication_summary %>%
     conflicting_ndc_codes > 0
   ) %>%
   select(
+    `Broad Group` = broad_group,
     Category = category,
     Medication = medication,
     `Missing NDC rows` = missing_ndc_rows,

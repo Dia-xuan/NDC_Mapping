@@ -17,8 +17,9 @@ parse_ndc_filename <- function(file_path) {
   # Split filename by "_"
   parts <- str_split(file_stem, "_")[[1]]
   
-  # Parent folder is the medication category
+  # Parent folders identify medication category and broad group
   category <- basename(dirname(file_path))
+  broad_group <- basename(dirname(dirname(file_path)))
   
   # First field is always the medication name
   medication <- parts[1]
@@ -63,6 +64,7 @@ parse_ndc_filename <- function(file_path) {
   }
   
   tibble(
+    broad_group = broad_group,
     category = category,
     medication = medication,
     combo = is_combo,

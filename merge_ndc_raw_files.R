@@ -65,6 +65,7 @@ read_one_file <- function(meta) {
   
   df %>%
     mutate(
+      broad_group = meta$broad_group,
       category    = meta$category,
       medication  = meta$medication,
       combo       = meta$combo,
@@ -142,12 +143,10 @@ process_medication <- function(meta) {
   
   # ----------------------------------------------------------
   # Exact duplicate detection
-  #
-  # Ignore provenance columns when deciding whether two
-  # FDA records are otherwise identical.
   # ----------------------------------------------------------
   
   provenance_cols <- c(
+    "broad_group",
     "category",
     "medication",
     "combo",
@@ -182,6 +181,7 @@ process_medication <- function(meta) {
       across(all_of(content_cols))
     ) %>%
     summarise(
+      broad_group = first(broad_group),
       category   = first(category),
       medication = first(medication),
       combo      = first(combo),
@@ -207,6 +207,7 @@ process_medication <- function(meta) {
       .groups = "drop"
     ) %>%
     relocate(
+      broad_group,
       category,
       medication,
       combo,
@@ -218,11 +219,6 @@ process_medication <- function(meta) {
   
   # ----------------------------------------------------------
   # Conflicting NDC
-  #
-  # If the same NDC still has >1 row after exact duplicates
-  # were removed, descriptive information differs.
-  #
-  # Keep ALL such rows in the master.
   # ----------------------------------------------------------
   
   merged <- merged %>%
@@ -241,6 +237,7 @@ process_medication <- function(meta) {
   # ----------------------------------------------------------
   
   stats <- tibble(
+    broad_group = meta$broad_group[1],
     category = meta$category[1],
     medication = meta$medication[1],
     combo = any(meta$combo),
@@ -292,11 +289,12 @@ process_medication <- function(meta) {
 
 
 # ============================================================
-# 4. Group files by category + medication
+# 4. Group files by broad group + category + medication
 # ============================================================
 
 medication_groups <- ndc_file_metadata %>%
   group_by(
+    broad_group,
     category,
     medication
   ) %>%
@@ -328,19 +326,22 @@ medication_summary <- map_dfr(results, "stats")
 # 7. Export by category
 # ============================================================
 
-categories <- unique(
-  ndc_file_metadata$category
-)
+category_index <- ndc_file_metadata %>%
+  distinct(
+    broad_group,
+    category
+  )
 
-walk(
-  categories,
+pwalk(
+  category_index,
   
-  function(cat) {
+  function(broad_group, category) {
     
     category_dir <- file.path(
       "data",
       "processed",
-      cat
+      broad_group,
+      category
     )
     
     qc_dir <- file.path(
@@ -381,24 +382,29 @@ walk(
     # --------------------------------------------------------
     
     category_master <- master_all %>%
-      filter(category == cat)
+      filter(
+        .data$broad_group == .env$broad_group,
+        .data$category == .env$category
+      )
     
     write_excel_csv(
       category_master,
       file.path(
         category_dir,
-        paste0(cat, "_master.csv")
+        paste0(category, "_master.csv")
       )
     )
     
     
     # --------------------------------------------------------
     # Missing NDC
-    # Only create file if rows exist
     # --------------------------------------------------------
     
     category_missing <- missing_all %>%
-      filter(category == cat)
+      filter(
+        .data$broad_group == .env$broad_group,
+        .data$category == .env$category
+      )
     
     if (nrow(category_missing) > 0) {
       
@@ -414,11 +420,13 @@ walk(
     
     # --------------------------------------------------------
     # Sparse records
-    # Only create file if rows exist
     # --------------------------------------------------------
     
     category_sparse <- sparse_all %>%
-      filter(category == cat)
+      filter(
+        .data$broad_group == .env$broad_group,
+        .data$category == .env$category
+      )
     
     if (nrow(category_sparse) > 0) {
       
@@ -434,11 +442,13 @@ walk(
     
     # --------------------------------------------------------
     # Conflicting NDC
-    # Only create file if rows exist
     # --------------------------------------------------------
     
     category_conflicts <- conflict_all %>%
-      filter(category == cat)
+      filter(
+        .data$broad_group == .env$broad_group,
+        .data$category == .env$category
+      )
     
     if (nrow(category_conflicts) > 0) {
       
@@ -485,7 +495,10 @@ write_excel_csv(
 # ============================================================
 
 category_summary <- medication_summary %>%
-  group_by(category) %>%
+  group_by(
+    broad_group,
+    category
+  ) %>%
   summarise(
     medications =
       n_distinct(medication),
@@ -527,7 +540,10 @@ category_summary <- medication_summary %>%
 
 
 category_master_counts <- master_all %>%
-  group_by(category) %>%
+  group_by(
+    broad_group,
+    category
+  ) %>%
   summarise(
     distinct_ndc_codes =
       n_distinct(`NDC Package Code`),
@@ -542,7 +558,10 @@ category_master_counts <- master_all %>%
 category_summary <- category_summary %>%
   left_join(
     category_master_counts,
-    by = "category"
+    by = c(
+      "broad_group",
+      "category"
+    )
   )
 
 
