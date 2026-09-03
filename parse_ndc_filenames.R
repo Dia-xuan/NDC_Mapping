@@ -18,8 +18,16 @@ parse_ndc_filename <- function(file_path) {
   parts <- str_split(file_stem, "_")[[1]]
   
   # Parent folders identify medication category and broad group
-  category <- basename(dirname(file_path))
-  broad_group <- basename(dirname(dirname(file_path)))
+  parent_dir <- basename(dirname(file_path))
+  grandparent_dir <- basename(dirname(dirname(file_path)))
+  
+  category <- parent_dir
+  
+  broad_group <- if_else(
+    grandparent_dir == "raw",
+    parent_dir,
+    grandparent_dir
+  )
   
   # First field is always the medication name
   medication <- parts[1]

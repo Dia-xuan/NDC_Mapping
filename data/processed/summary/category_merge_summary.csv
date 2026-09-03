@@ -1,8 +1,10 @@
 ﻿"broad_group","category","medications","combo_medications","raw_files","raw_rows","nonproprietary_rows","proprietary_rows","exact_duplicates_removed","conflicting_ndc_codes","conflicting_rows_retained","missing_ndc_rows","sparse_rows","distinct_ndc_codes","final_master_rows"
+"Antibiotics","Antibiotics",45,5,66,7472,6697,775,603,1,2,0,33,6848,6869
 "Cardiovascular_Medication","ACE_Inhibitors",15,4,21,2157,2071,86,72,0,0,4,1,2068,2081
 "Cardiovascular_Medication","ARBs",19,12,26,3219,3098,121,43,0,0,0,1,3113,3176
 "Cardiovascular_Medication","Other_Antihypertensives",46,0,74,12526,12354,172,164,1,2,27,28,11829,12335
 "Cardiovascular_Medication","Other_Cardiovascular_Drugs",45,0,81,8680,8298,382,325,23,46,7,17,8242,8348
+"Diabetic_Medication","Diabetic_Medication",38,4,60,3848,3496,352,186,0,0,0,0,3252,3662
 "Gastrointestinal_Medication","Antacids",19,2,22,4651,4398,253,191,0,0,0,2,4088,4460
 "Gastrointestinal_Medication","Anti_H_Pylori",4,4,4,6,0,6,0,0,0,0,0,6,6
 "Gastrointestinal_Medication","Histamine_2_Receptor_Antagonists",6,1,11,1392,1239,153,37,62,124,0,0,1238,1355
@@ -10,6 +12,7 @@
 "Gastrointestinal_Medication","Phenothiazine_Antiemetics",6,0,8,933,923,10,4,0,0,0,0,784,929
 "Gastrointestinal_Medication","Proton_Pump_Inhibitors",10,1,18,3129,3023,106,81,17,34,1,0,2335,3047
 "Gastrointestinal_Medication","Ulcerative_Colitis_Treatment",42,0,61,1947,1672,275,99,0,0,0,2,1541,1848
+"Hyperlipidemia_Medication","Hyperlipidemia_Medication",25,3,43,4163,3886,277,64,4,8,4,4,4004,4095
 "Metabolic_and_Related_Medication","Anorexiants",10,2,16,864,790,74,63,4,8,0,0,797,801
 "Metabolic_and_Related_Medication","Antithyroid_Agents",4,0,6,284,158,126,3,0,0,0,1,281,281
 "Metabolic_and_Related_Medication","Hypothyroid_Treatment",3,0,10,1585,1342,243,3,138,276,0,0,1444,1582
@@ -22,12 +25,9 @@
 "OB:GYN","Medroxyprogesterone",2,1,5,101,86,15,10,0,0,0,0,86,91
 "OB:GYN","Oral_Contraceptives",12,7,23,1087,624,463,19,0,0,0,0,892,1068
 "OB:GYN","Other_Contraception",9,5,16,209,165,44,13,0,0,0,0,190,196
-"Other","Antibiotics",45,5,66,7472,6697,775,603,1,2,0,33,6848,6869
-"Other","Diabetic_Medication",38,4,60,3848,3496,352,186,0,0,0,0,3252,3662
-"Other","Hyperlipidemia_Medication",25,3,43,4163,3886,277,64,4,8,4,4,4004,4095
-"Other","Severe_Cardiovascular_Medication",28,1,48,3086,2710,376,328,0,0,0,1,2631,2758
 "Respiratory:allergy_Medication","Corticosteroids",46,0,90,6272,5901,371,298,0,0,0,1,4894,5974
 "Respiratory:allergy_Medication","NonSedating_Antihistamines",11,0,23,3344,3061,283,277,6,12,0,0,3033,3067
 "Respiratory:allergy_Medication","Other_Antihistamines",14,0,26,5747,5565,182,109,38,76,3,1,4956,5635
 "Respiratory:allergy_Medication","Other_Asthma_Medications",26,6,46,1191,1081,110,61,0,0,0,0,1102,1130
 "Respiratory:allergy_Medication","Smoking_Cessation",4,0,7,3696,3553,143,49,92,184,1,0,2371,3646
+"Severe_Cardiovascular_Medication","Severe_Cardiovascular_Medication",28,1,48,3086,2710,376,328,0,0,0,1,2631,2758
